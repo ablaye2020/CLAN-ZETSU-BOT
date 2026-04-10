@@ -1,8 +1,11 @@
 import os
+import asyncio
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 TOKEN = os.environ.get("BOT_TOKEN")
+
+print(f"🤖 Démarrage du bot avec token: {TOKEN[:10]}...")  # Affiche le début du token pour vérifier
 
 async def start(update: Update, context):
     await update.message.reply_text(
@@ -59,15 +62,19 @@ async def repondre(update: Update, context):
         "Tape /start pour voir les commandes ⚔️"
     )
 
-app = Application.builder().token(TOKEN).build()
-
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("regles", regles))
-app.add_handler(CommandHandler("membres", membres))
-app.add_handler(CommandHandler("event", event))
-app.add_handler(CommandHandler("chef", chef))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, repondre))
-
-if __name__ == "__main__":
+def main():
+    print("⚔️ Initialisation du bot Clan Zetsu...")
+    app = Application.builder().token(TOKEN).build()
+    
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("regles", regles))
+    app.add_handler(CommandHandler("membres", membres))
+    app.add_handler(CommandHandler("event", event))
+    app.add_handler(CommandHandler("chef", chef))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, repondre))
+    
     print("🤖 Bot du Clan ZETSU en ligne ! ⚔️")
     app.run_polling()
+
+if __name__ == "__main__":
+    main()
