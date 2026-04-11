@@ -13,7 +13,7 @@ def main():
     TOKEN = os.environ.get('TELEGRAM_TOKEN')
     
     if not TOKEN:
-        print("8681412594:AAEMfaMbxzYmOiaYntjudR9HQ2jR9wGl49U")
+        print("8598451144:AAEWQjJYf87qiACulXdch1NVDI35QCj_J4E")
         return
     
     app = Application.builder().token(TOKEN).build()
